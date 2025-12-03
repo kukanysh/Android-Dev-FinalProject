@@ -1,4 +1,4 @@
 package com.example.movie.model
 
-class Team {
+class Movie {
 }
