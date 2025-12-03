@@ -9,7 +9,9 @@ interface ApiService {
     @GET("/")
     suspend fun getMovies(
         @Query("apikey") apiKey: String,
-        @Query("t") title: String
+        @Query("s") title: String,
+        @Query("type") type: String? = "movie", //movie, series, episode
+        @Query("page") page: Int? = 1
     ): MovieResponse
 
 
