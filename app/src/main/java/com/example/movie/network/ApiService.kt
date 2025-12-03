@@ -1,4 +1,8 @@
 package com.example.movie.network
 
-class ApiService {
+interface ApiService {
+
+    @GET()
+
+
 }
