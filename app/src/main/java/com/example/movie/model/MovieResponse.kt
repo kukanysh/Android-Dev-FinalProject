@@ -1,6 +1,6 @@
 package com.example.movie.model
 
-data class MovieResponse(
+private data class MovieRespone(
     val movies: List<Movie>?
 
 )

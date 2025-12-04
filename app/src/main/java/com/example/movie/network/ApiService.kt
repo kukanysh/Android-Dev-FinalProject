@@ -12,7 +12,7 @@ interface ApiService {
         @Query("s") title: String,
         @Query("type") type: String? = "movie", //movie, series, episode
         @Query("page") page: Int? = 1
-    ): MovieResponse
+    ): retrofit2.Response<MovieResponse>
 
 
 
