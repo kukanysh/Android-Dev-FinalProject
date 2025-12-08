@@ -10,7 +10,8 @@
         android:layout_width="123dp"
         android:layout_height="195dp"
         android:layout_marginEnd="20dp"
-        android:scaleType="fitStart" />
+        android:scaleType="fitStart"
+        android:contentDescription="Poster Image"/>
 
     <TextView
         android:id="@+id/titleTextView"
