@@ -22,12 +22,42 @@
             android:layout_height="wrap_content">
 
             <!-- Poster -->
-            <ImageView
-                android:id="@+id/detailPoster"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Movie Poster" />
+                android:layout_height="500dp">
+
+                <ImageView
+                    android:id="@+id/detailPoster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Movie_Poster" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="16dp"
+                    android:gravity="end"
+                    android:layout_gravity="top|end">
+
+                    <ImageButton
+                        android:id="@+id/btnLike"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_heart_outline" />
+
+                    <ImageButton
+                        android:id="@+id/btnSave"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_bookmark_outline" />
+                </LinearLayout>
+
+            </FrameLayout>
+
 
             <!-- Gradient -->
             <View
@@ -126,9 +156,9 @@
 
         <!-- Additional movie info -->
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="30dp"
             android:paddingRight="30dp">
 
@@ -136,14 +166,14 @@
                 android:id="@+id/detailPlot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
                 android:textColor="#ABABAB"
-                android:textSize="16sp"
-                android:paddingBottom="12dp" />
+                android:textSize="16sp" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -156,10 +186,10 @@
                     android:id="@+id/detailDirector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="12dp"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -174,9 +204,9 @@
                 android:id="@+id/detailActors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:paddingBottom="12dp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -190,9 +220,9 @@
                 android:id="@+id/detailCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:paddingBottom="12dp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/detailReleased"

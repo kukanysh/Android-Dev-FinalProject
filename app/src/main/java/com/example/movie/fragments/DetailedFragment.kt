@@ -1,7 +1,9 @@
 package com.example.movie.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -13,6 +15,12 @@ import com.example.movie.viewmodel.ViewModel
 class DetailedFragment : Fragment(R.layout.detailed_fragment) {
 
     private lateinit var viewModel: ViewModel
+
+    private var isLiked = false
+    private var isSaved = false
+
+    private lateinit var btnLike: ImageButton
+    private lateinit var btnSave: ImageButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,10 +38,45 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
         val actors = view.findViewById<TextView>(R.id.detailActors)
         val country = view.findViewById<TextView>(R.id.detailCountry)
         val plot = view.findViewById<TextView>(R.id.detailPlot)
-//        val rated = view.findViewById<TextView>(R.id.detailRated)
         val released = view.findViewById<TextView>(R.id.detailReleased)
 
-        // Observe movie details
+        btnLike = view.findViewById(R.id.btnLike)
+        btnSave = view.findViewById(R.id.btnSave)
+
+        val prefs = requireContext().getSharedPreferences("movie_prefs", Context.MODE_PRIVATE)
+
+        // Загружаем сохранённые состояния для этого фильма
+        isLiked = prefs.getBoolean("${movieId}_liked", false)
+        isSaved = prefs.getBoolean("${movieId}_saved", false)
+
+        // Устанавливаем иконки при загрузке
+        btnLike.setImageResource(if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
+        btnSave.setImageResource(if (isSaved) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_outline)
+
+        fun animatePop(button: ImageButton) {
+            button.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction {
+                button.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+            }.start()
+        }
+
+        btnLike.setOnClickListener {
+            isLiked = !isLiked
+            btnLike.setImageResource(if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
+            animatePop(btnLike)
+
+            // Сохраняем состояние
+            prefs.edit().putBoolean("${movieId}_liked", isLiked).apply()
+        }
+
+        btnSave.setOnClickListener {
+            isSaved = !isSaved
+            btnSave.setImageResource(if (isSaved) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_outline)
+            animatePop(btnSave)
+
+            // Сохраняем состояние
+            prefs.edit().putBoolean("${movieId}_saved", isSaved).apply()
+        }
+
         viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
             title.text = movie.title
             year.text = movie.year
@@ -43,16 +86,14 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
             actors.text = movie.actors
             country.text = movie.country
             plot.text = movie.plot
-//            rated.text = movie.rated
             released.text = movie.released
-
 
             Glide.with(this)
                 .load(movie.poster)
                 .into(poster)
         }
 
-        // Load details
         viewModel.loadMovieDetail(movieId)
     }
 }
+
