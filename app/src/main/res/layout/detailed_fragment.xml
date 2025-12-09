@@ -9,150 +9,217 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <!-- Poster with gradient and text -->
-        <FrameLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Poster -->
+            <!-- Poster with gradient and text -->
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/detailPoster"
+                <!-- Poster -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp">
+
+                    <ImageView
+                        android:id="@+id/detailPoster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Movie_Poster" />
+
+                </FrameLayout>
+
+                <!-- Gradient -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/bottom_gradient" />
+
+                <!-- Title, info, button -->
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="Movie_Poster" />
+                    android:padding="30dp"
+                    android:gravity="bottom">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="16dp"
-                    android:gravity="end"
-                    android:layout_gravity="top|end">
+                    <!-- TITLE -->
+                    <TextView
+                        android:id="@+id/detailTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
 
-                    <ImageButton
-                        android:id="@+id/btnLike"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_heart_outline" />
+                    <!-- INFO ROW -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp">
 
-                    <ImageButton
-                        android:id="@+id/btnSave"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_bookmark_outline" />
+                        <TextView
+                            android:id="@+id/detailYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#CCCCCC"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" • "
+                            android:textColor="#CCCCCC"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/detailRuntime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#CCCCCC"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" • "
+                            android:textColor="#CCCCCC"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/detailGenre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#CCCCCC"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- PLAY BUTTON -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/playButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Play Now"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#E50914"
+                        app:cornerRadius="12dp"
+                        android:icon="@drawable/play_button"
+                        android:iconTint="@color/white"
+                        app:iconGravity="textStart"
+                        app:iconSize="24dp"
+                        app:iconPadding="12dp"/>
+
+                    <!-- Action Buttons (List, Like, Send) -->
+                    <!-- Action Buttons (List, Like, Send) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="16dp">
+
+                        <!-- List Button -->
+                        <LinearLayout
+                            android:id="@+id/btnList"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless">
+
+                            <ImageView
+                                android:id="@+id/listIcon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_list"
+                                android:contentDescription="List" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="List"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+
+                        <!-- Like Button -->
+                        <LinearLayout
+                            android:id="@+id/btnLike"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless">
+
+                            <ImageView
+                                android:id="@+id/likeIcon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_like"
+                                android:contentDescription="Like" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Like"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+
+                        <!-- Send Button -->
+                        <LinearLayout
+                            android:id="@+id/btnSend"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless">
+
+                            <ImageView
+                                android:id="@+id/sendIcon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_send"
+                                android:contentDescription="Send" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Send"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </FrameLayout>
 
-
-            <!-- Gradient -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/bottom_gradient" />
-
-            <!-- Title, info, button -->
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="30dp"
-                android:gravity="bottom">
-
-                <!-- TITLE -->
-                <TextView
-                    android:id="@+id/detailTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
-                <!-- INFO ROW -->
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp">
-
-                    <TextView
-                        android:id="@+id/detailYear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" • "
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/detailRuntime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" • "
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/detailGenre"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
-                <!-- BUTTON -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/playButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Play Now"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#E50914"
-                    app:cornerRadius="12dp"
-                    android:icon="@drawable/play_button"
-                    android:iconTint="@color/white"
-                    app:iconGravity="textStart"
-                    app:iconSize="148dp"
-                    app:iconPadding="12dp"/>
-            </LinearLayout>
-
-        </FrameLayout>
-
-    </LinearLayout>
+        </LinearLayout>
 
         <!-- Additional movie info -->
         <LinearLayout
@@ -160,7 +227,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingRight="30dp"
+            android:paddingTop="24dp">
 
             <TextView
                 android:id="@+id/detailPlot"

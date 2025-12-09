@@ -1,10 +1,11 @@
 package com.example.movie.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,8 +20,11 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
     private var isLiked = false
     private var isSaved = false
 
-    private lateinit var btnLike: ImageButton
-    private lateinit var btnSave: ImageButton
+    private lateinit var btnLike: LinearLayout
+    private lateinit var btnSave: LinearLayout
+    private lateinit var btnSend: LinearLayout
+    private lateinit var likeIcon: ImageView
+    private lateinit var listIcon: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +45,10 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
         val released = view.findViewById<TextView>(R.id.detailReleased)
 
         btnLike = view.findViewById(R.id.btnLike)
-        btnSave = view.findViewById(R.id.btnSave)
+        btnSave = view.findViewById(R.id.btnList)
+        btnSend = view.findViewById(R.id.btnSend)
+        likeIcon = view.findViewById(R.id.likeIcon)
+        listIcon = view.findViewById(R.id.listIcon)
 
         val prefs = requireContext().getSharedPreferences("movie_prefs", Context.MODE_PRIVATE)
 
@@ -50,19 +57,19 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
         isSaved = prefs.getBoolean("${movieId}_saved", false)
 
         // Устанавливаем иконки при загрузке
-        btnLike.setImageResource(if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
-        btnSave.setImageResource(if (isSaved) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_outline)
+        likeIcon.setImageResource(if (isLiked) R.drawable.ic_like_filled else R.drawable.ic_like)
+        listIcon.setImageResource(if (isSaved) R.drawable.ic_list_filled else R.drawable.ic_list)
 
-        fun animatePop(button: ImageButton) {
-            button.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction {
-                button.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+        fun animatePop(icon: ImageView) {
+            icon.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction {
+                icon.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
             }.start()
         }
 
         btnLike.setOnClickListener {
             isLiked = !isLiked
-            btnLike.setImageResource(if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
-            animatePop(btnLike)
+            likeIcon.setImageResource(if (isLiked) R.drawable.ic_like_filled else R.drawable.ic_like)
+            animatePop(likeIcon)
 
             // Сохраняем состояние
             prefs.edit().putBoolean("${movieId}_liked", isLiked).apply()
@@ -70,12 +77,14 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
 
         btnSave.setOnClickListener {
             isSaved = !isSaved
-            btnSave.setImageResource(if (isSaved) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_outline)
-            animatePop(btnSave)
+            listIcon.setImageResource(if (isSaved) R.drawable.ic_list_filled else R.drawable.ic_list)
+            animatePop(listIcon)
 
             // Сохраняем состояние
             prefs.edit().putBoolean("${movieId}_saved", isSaved).apply()
         }
+
+
 
         viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
             title.text = movie.title
@@ -96,4 +105,3 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
         viewModel.loadMovieDetail(movieId)
     }
 }
-
