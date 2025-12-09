@@ -52,11 +52,11 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
 
         val prefs = requireContext().getSharedPreferences("movie_prefs", Context.MODE_PRIVATE)
 
-        // Загружаем сохранённые состояния для этого фильма
+
         isLiked = prefs.getBoolean("${movieId}_liked", false)
         isSaved = prefs.getBoolean("${movieId}_saved", false)
 
-        // Устанавливаем иконки при загрузке
+
         likeIcon.setImageResource(if (isLiked) R.drawable.ic_like_filled else R.drawable.ic_like)
         listIcon.setImageResource(if (isSaved) R.drawable.ic_list_filled else R.drawable.ic_list)
 
@@ -71,7 +71,7 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
             likeIcon.setImageResource(if (isLiked) R.drawable.ic_like_filled else R.drawable.ic_like)
             animatePop(likeIcon)
 
-            // Сохраняем состояние
+
             prefs.edit().putBoolean("${movieId}_liked", isLiked).apply()
         }
 
@@ -80,12 +80,12 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
             listIcon.setImageResource(if (isSaved) R.drawable.ic_list_filled else R.drawable.ic_list)
             animatePop(listIcon)
 
-            // Сохраняем состояние
+
             prefs.edit().putBoolean("${movieId}_saved", isSaved).apply()
         }
 
         btnSend.setOnClickListener {
-            // Делимся фильмом через системное меню Share
+
             viewModel.movieDetail.value?.let { movie ->
                 val shareIntent = Intent().apply {
                     action = Intent.ACTION_SEND
