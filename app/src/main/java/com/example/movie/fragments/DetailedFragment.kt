@@ -84,7 +84,17 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
             prefs.edit().putBoolean("${movieId}_saved", isSaved).apply()
         }
 
-
+        btnSend.setOnClickListener {
+            // Делимся фильмом через системное меню Share
+            viewModel.movieDetail.value?.let { movie ->
+                val shareIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, "Check out this movie: ${movie.title} (${movie.year})")
+                }
+                startActivity(Intent.createChooser(shareIntent, "Share via"))
+            }
+        }
 
         viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
             title.text = movie.title
