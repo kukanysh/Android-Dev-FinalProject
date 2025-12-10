@@ -20,8 +20,6 @@ class Adapter(
     private val onItemClick: (Movie) -> Unit,
 ) : RecyclerView.Adapter<Adapter.MovieViewHolder>() {
 
-
-
     inner class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val poster: ImageView = view.findViewById(R.id.posterImageView)
         val title: TextView? = view.findViewById(R.id.titleTextView)
