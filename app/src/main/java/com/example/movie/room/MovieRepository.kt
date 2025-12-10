@@ -14,7 +14,7 @@ class MovieRepository(private val movieDao: MovieDao, private val apiService: Ap
             Log.d("MovieRepository", "Loaded from network: ${movies.size} movies")
 
             // Save search results basic info
-            val moviesEntity = movies.map { it.toEntity() }
+            val moviesEntity = movies.map { it.toEntity().copy(searchQuery = title) }
             movieDao.insertMovies(moviesEntity)
 
             // Fetch full details for offline
@@ -22,7 +22,7 @@ class MovieRepository(private val movieDao: MovieDao, private val apiService: Ap
                 try {
                     val detail = apiService.getMovieById("a6a1e977", movie.imdbID).body()
                     detail?.let {
-                        movieDao.insertMovies(listOf(it.toEntity()))
+                        movieDao.insertMovies(listOf(it.toEntity().copy(searchQuery = title)))
                         Log.d("MovieRepository", "Saved full detail: ${it.title}")
                     }
                 } catch (e: Exception) {
@@ -30,16 +30,13 @@ class MovieRepository(private val movieDao: MovieDao, private val apiService: Ap
                 }
             }
 
-            // Return full movies from Room
-            movieDao.getAllMovies().map { it.toMovie() }
+            return movies
 
         } catch (e: Exception) {
             Log.d("MovieRepository", "Network error: $e, loading from Room")
-            movieDao.getAllMovies().map { it.toMovie() }
+            movieDao.getMoviesByQuery(title).map { it.toMovie() }
         }
     }
-
-
 
     suspend fun getMovieById(movieId: String): Movie? {
         return try {
