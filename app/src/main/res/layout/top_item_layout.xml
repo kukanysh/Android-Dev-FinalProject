@@ -11,7 +11,7 @@
         android:id="@+id/posterImageView"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:scaleType="fitCenter"
+        android:scaleType="fitEnd"
         android:layout_marginTop="30dp"
         android:clipToOutline="true"/>
 </LinearLayout>

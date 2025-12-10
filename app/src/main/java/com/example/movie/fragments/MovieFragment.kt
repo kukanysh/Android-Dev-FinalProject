@@ -55,11 +55,11 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
                         val distance = kotlin.math.abs(mid - childMid)
 
                         // scale main item to 1.0, neighbors smaller (0.7-0.85)
-                        val scale = 0.7f + (1 - (distance / rv.width).coerceIn(0f, 1f)) * 0.3f
+                        val scale = 0.7f + (1 - (distance / rv.width).coerceIn(0f, 1f)) * 0.4f
 
                         child.scaleX = scale
                         child.scaleY = scale
-                        child.alpha = 0.5f + (scale - 0.7f) / 0.3f * 0.5f // optional: fade neighbors
+
                     }
                 }
             })

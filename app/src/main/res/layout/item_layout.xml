@@ -23,8 +23,8 @@
         android:paddingTop="4dp"
         android:text="Movie Title"
         android:textSize="14sp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
 
 

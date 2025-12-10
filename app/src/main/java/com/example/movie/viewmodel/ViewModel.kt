@@ -16,9 +16,9 @@ class ViewModel: ViewModel() {
 
     val movieDetail = MutableLiveData<Movie>()
 
-    fun loadPopularMovies() = loadMovies("movie", popularMovies)
+    fun loadPopularMovies() = loadMovies("street", popularMovies)
     fun loadTrendingMovies() = loadMovies("avengers", trendingMovies)
-    fun loadRecentMovies() = loadMovies("inc", recentMovies)
+    fun loadRecentMovies() = loadMovies("war", recentMovies)
 
     fun loadMovies(title: String, liveData: MutableLiveData<List<Movie>>) {
         viewModelScope.launch {
