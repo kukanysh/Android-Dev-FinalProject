@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.adapter.Adapter
 import com.example.movie.model.Movie
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,34 +41,6 @@ class MainActivity : AppCompatActivity() {
             findNavController(R.id.nav_host_fragment).navigate(R.id.detailFragment, bundle)
 
         }
-
-
-
-
-
-//    private fun loadMovies() {
-//
-//        lifecycleScope.launch {
-//            val response = RetrofitInstance.api.getMovies(
-//                apiKey = "a6a1e977",
-//                title = "iron man",
-//                page = 1
-//            )
-//
-//            if (response.isSuccessful) {
-//                val movies = response.body()?.search ?: emptyList()
-//                recyclerView.adapter = Adapter(movies)
-//
-//                movies?.forEach {
-//                    Log.d("MOVIES", "${it.title} (${it.year}) - ${it.imdbID}")
-//                }
-//            } else {
-//                println("Request failed: ${response.errorBody()}")
-//            }
-//        }
-//    }
-
-
     }
 }
 

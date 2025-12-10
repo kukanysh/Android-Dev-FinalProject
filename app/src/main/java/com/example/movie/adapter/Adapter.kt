@@ -25,7 +25,6 @@ class Adapter(
     inner class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val poster: ImageView = view.findViewById(R.id.posterImageView)
         val title: TextView? = view.findViewById(R.id.titleTextView)
-//        val year = view.findViewById<TextView>(R.id.yearTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -38,9 +37,6 @@ class Adapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]
-
-
-//        holder.year.text = movie.year
 
         Glide.with(holder.itemView.context)
             .load(movie.poster)
