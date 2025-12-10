@@ -1,8 +1,7 @@
-package com.example.movie
+package com.example.movie.room
 
 import android.app.Application
 import androidx.room.Room
-import com.example.movie.room.MovieDatabase
 
 class App : Application() {
 

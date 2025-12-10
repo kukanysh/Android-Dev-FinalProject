@@ -2,7 +2,7 @@ package com.example.movie.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.movie.model.MovieEntity
+import com.example.movie.room.MovieEntity
 
 @Database(
     entities = [MovieEntity::class],
