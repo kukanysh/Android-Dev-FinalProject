@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movie.model.Movie
 import com.example.movie.room.MovieRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MovieViewModel(private val repository: MovieRepository): ViewModel() {
 
@@ -27,18 +29,23 @@ class MovieViewModel(private val repository: MovieRepository): ViewModel() {
     }
 
     fun loadMovies(title: String, liveData: MutableLiveData<List<Movie>>) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val movies = repository.getMovies(title)
-            liveData.value = movies
+
+            withContext(Dispatchers.Main) {
+                liveData.value = movies
+            }
 
         }
     }
 
 
     fun loadMovieDetail(movieId: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val movie = repository.getMovieById(movieId)
-            movieDetail.value = movie
+            withContext(Dispatchers.Main) {
+                movieDetail.value = movie
+            }
         }
     }
 
