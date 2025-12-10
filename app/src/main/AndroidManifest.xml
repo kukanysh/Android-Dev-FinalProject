@@ -13,8 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Movie"
-        android:name=".room.App">
+        android:theme="@style/Theme.Movie">
 
         <activity
             android:name=".MainActivity"

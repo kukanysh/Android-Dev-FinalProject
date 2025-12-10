@@ -5,19 +5,34 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.movie.R
-import com.example.movie.viewmodel.ViewModel
+import com.example.movie.network.RetrofitInstance
+import com.example.movie.room.MovieDatabase
+import com.example.movie.room.MovieRepository
+import com.example.movie.viewmodel.MovieViewModel
 
 class DetailedFragment : Fragment(R.layout.detailed_fragment) {
 
-    private lateinit var viewModel: ViewModel
+    private val repository by lazy {
+        val movieDao = MovieDatabase.getDatabase(requireContext()).movieDao()
+        MovieRepository(movieDao, RetrofitInstance.api)
+    }
+
+    private val viewModel: MovieViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
+                return MovieViewModel(repository) as T
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this)[ViewModel::class.java]
 
         val movieId = arguments?.getString("movieId") ?: return
 
@@ -30,20 +45,18 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
         val actors = view.findViewById<TextView>(R.id.detailActors)
         val country = view.findViewById<TextView>(R.id.detailCountry)
         val plot = view.findViewById<TextView>(R.id.detailPlot)
-//        val rated = view.findViewById<TextView>(R.id.detailRated)
         val released = view.findViewById<TextView>(R.id.detailReleased)
 
         // Observe movie details
         viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
-            title.text = movie.title
-            year.text = movie.year
-            runtime.text = movie.runtime
-            genre.text = movie.genre
-            director.text = movie.director
-            actors.text = movie.actors
+            title.text = movie?.title
+            year.text = movie?.year
+            runtime.text = movie?.runtime
+            genre.text = movie?.genre
+            director.text = movie?.director
+            actors.text = movie?.actors
             country.text = movie.country
             plot.text = movie.plot
-//            rated.text = movie.rated
             released.text = movie.released
 
 
