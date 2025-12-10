@@ -2,7 +2,7 @@ package com.example.movie.room
 
 import com.example.movie.model.Movie
 
-fun Movie.toEntity(): MovieEntity {
+fun Movie.toEntity(searchQuery: String = ""): MovieEntity {
     return MovieEntity(
         imdbID = this.imdbID,
         title = this.title,
@@ -18,7 +18,8 @@ fun Movie.toEntity(): MovieEntity {
         actors = this.actors,
         plot = this.plot,
         language = this.language,
-        country = this.country
+        country = this.country,
+        searchQuery = searchQuery
     )
 }
 

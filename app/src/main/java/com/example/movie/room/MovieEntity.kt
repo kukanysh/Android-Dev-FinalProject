@@ -19,5 +19,6 @@ data class MovieEntity(
     val actors: String?,
     val plot: String?,
     val language: String?,
-    val country: String?
+    val country: String?,
+    val searchQuery: String
 )
