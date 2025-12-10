@@ -15,7 +15,7 @@ class MovieViewModel(private val repository: MovieRepository): ViewModel() {
     val movieDetail = MutableLiveData<Movie?>()
 
     fun loadPopularMovies() {
-        loadMovies("street", popularMovies)
+        loadMovies("jump", popularMovies)
     }
 
     fun loadTrendingMovies() {
