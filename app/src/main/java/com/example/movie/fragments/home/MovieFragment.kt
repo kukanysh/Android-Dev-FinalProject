@@ -60,8 +60,6 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
 
 
-
-
         // Observe LiveData and display items
         viewModel.popularMovies.observe(viewLifecycleOwner) { movies ->
             popularRv.adapter = Adapter(movies, isTopList = true) { movie ->
@@ -89,12 +87,6 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
             }
         }
-
-
-
-
-
-
 
         // Load data
         viewModel.loadPopularMovies()
