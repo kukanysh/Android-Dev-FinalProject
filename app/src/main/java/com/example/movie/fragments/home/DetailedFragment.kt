@@ -1,4 +1,4 @@
-package com.example.movie.fragments
+package com.example.movie.fragments.home
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -72,7 +73,7 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
             animatePop(likeIcon)
 
 
-            prefs.edit().putBoolean("${movieId}_liked", isLiked).apply()
+            prefs.edit { putBoolean("${movieId}_liked", isLiked) }
         }
 
         btnSave.setOnClickListener {
@@ -81,7 +82,7 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
             animatePop(listIcon)
 
 
-            prefs.edit().putBoolean("${movieId}_saved", isSaved).apply()
+            prefs.edit { putBoolean("${movieId}_saved", isSaved) }
         }
 
         btnSend.setOnClickListener {
@@ -90,7 +91,10 @@ class DetailedFragment : Fragment(R.layout.detailed_fragment) {
                 val shareIntent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, "Check out this movie: ${movie.title} (${movie.year})")
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "Check out this movie: ${movie.title} (${movie.year})"
+                    )
                 }
                 startActivity(Intent.createChooser(shareIntent, "Share via"))
             }
