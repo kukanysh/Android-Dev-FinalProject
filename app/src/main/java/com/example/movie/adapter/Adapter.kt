@@ -15,7 +15,7 @@ import com.example.movie.R
 import com.example.movie.model.Movie
 
 class Adapter(
-    private val movies: List<Movie>,
+    private var movies: MutableList<Movie> = mutableListOf(),
     private val isTopList: Boolean,
     private val onItemClick: (Movie) -> Unit,
 ) : RecyclerView.Adapter<Adapter.MovieViewHolder>() {
@@ -52,6 +52,12 @@ class Adapter(
         holder.itemView.setOnClickListener {
             onItemClick(movie)
         }
-
     }
+
+    fun updateList(newMovies: List<Movie>) {
+        movies.clear()
+        movies.addAll(newMovies)
+        notifyDataSetChanged()
+    }
+
 }
