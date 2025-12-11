@@ -35,7 +35,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         btnEditProfile = view.findViewById(R.id.btnEditProfile)
 
         // Set username (you can get this from SharedPreferences or a database)
-        profileUsername.text = "Movie Fan"
+        profileUsername.text = "Leo Messi"
 
         // Setup RecyclerViews
         likedMoviesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
