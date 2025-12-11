@@ -62,31 +62,36 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
         // Observe LiveData and display items
         viewModel.popularMovies.observe(viewLifecycleOwner) { movies ->
-            popularRv.adapter = Adapter(movies, isTopList = true) { movie ->
+            val adapter = Adapter(isTopList = true) { movie ->
                 val bundle = Bundle()
                 bundle.putString("movieId", movie.imdbID)
                 findNavController().navigate(R.id.detailFragment, bundle)
-
             }
+            adapter.updateList(movies)
+            popularRv.adapter = adapter
         }
 
         viewModel.trendingMovies.observe(viewLifecycleOwner) { movies ->
-            trendingRv.adapter = Adapter(movies, isTopList = false) { movie ->
+            val adapter = Adapter(isTopList = false) { movie ->
                 val bundle = Bundle()
                 bundle.putString("movieId", movie.imdbID)
                 findNavController().navigate(R.id.detailFragment, bundle)
-
             }
+            adapter.updateList(movies)
+            trendingRv.adapter = adapter
         }
+
 
         viewModel.recentMovies.observe(viewLifecycleOwner) { movies ->
-            recentRv.adapter = Adapter(movies, isTopList = false) { movie ->
+            val adapter = Adapter(isTopList = false) { movie ->
                 val bundle = Bundle()
                 bundle.putString("movieId", movie.imdbID)
                 findNavController().navigate(R.id.detailFragment, bundle)
-
             }
+            adapter.updateList(movies)
+            recentRv.adapter = adapter
         }
+
 
         // Load data
         viewModel.loadPopularMovies()
