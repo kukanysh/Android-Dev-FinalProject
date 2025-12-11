@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
     implementation(libs.constraintlayout)
+    implementation(libs.androidx.runtime.saved.instance.state)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
